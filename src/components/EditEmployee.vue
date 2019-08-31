@@ -55,7 +55,9 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      db.collection('employees').where('employee_id', '==', to.params.employee_id).get().then((querySnapshot) => {
+      db.collection('employees').where('employee_id', '==', to.params.employee_id)
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           next(vm => {
             vm.employee_id = doc.data().employee_id;
@@ -85,7 +87,7 @@
         })
       },
       updateEmployee () {
-        if (confirm('คุณต้องการเปลี่ยนแปลงข้อมูล')) {
+        if (confirm('คุณต้องการเปลี่ยนแปลงข้อมูลหรือไม่')) {
         db.collection('employees').where('employee_id', '==', this.$route.params.employee_id).get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             doc.ref.update({
